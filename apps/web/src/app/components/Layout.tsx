@@ -14,10 +14,10 @@ import {
 } from '@chakra-ui/react';
 
 import { FaRss } from 'react-icons/fa';
-import { MdHome } from 'react-icons/md';
 import { FiMenu } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { AiFillFileAdd } from 'react-icons/all';
 
 export default function Layout(props: { children: React.ReactNode }) {
   const sidebar = useDisclosure();
@@ -103,7 +103,7 @@ export default function Layout(props: { children: React.ReactNode }) {
         aria-label="Main Navigation"
       >
         <Link to="/new">
-          <NavItem icon={MdHome}>new Post</NavItem>
+          <NavItem icon={AiFillFileAdd}>new Post</NavItem>
         </Link>
         <Link to="/">
           <NavItem icon={FaRss}>Posts</NavItem>
