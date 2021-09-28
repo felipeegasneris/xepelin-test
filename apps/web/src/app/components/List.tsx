@@ -4,6 +4,8 @@ import React, { Fragment, LegacyRef, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { PostType, usePostService } from '@xepelin-test/core';
+import {Link} from 'react-router-dom'
+import PostItem from './PostItem'
 export default function List() {
   const { getPaginated } = usePostService();
   const {
@@ -49,17 +51,7 @@ export default function List() {
             data.pages.map((page) => (
               <Box key={page.nextId}>
                 {page.data.map((post) => (
-                  <div
-                    style={{
-                      border: '1px solid gray',
-                      borderRadius: '5px',
-                      padding: '1rem',
-                    }}
-                    key={post.id}
-                  >
-                    {post.id}
-                    {post.title}
-                  </div>
+                  <PostItem title={post.title} body={post.body} id={post.id}/>
                 ))}
               </Box>
             ))}
