@@ -1,11 +1,9 @@
 import { Box } from '@chakra-ui/react';
-import axios from 'axios';
-import React, { Fragment, LegacyRef, useRef } from 'react';
+import React, { LegacyRef, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
-import { PostType, usePostService } from '@xepelin-test/core';
-import {Link} from 'react-router-dom'
-import PostItem from './PostItem'
+import { usePostService } from '@xepelin-test/core';
+import PostItem from './PostItem';
 export default function List() {
   const { getPaginated } = usePostService();
   const {
@@ -14,11 +12,8 @@ export default function List() {
     error,
     isFetching,
     isFetchingNextPage,
-    isFetchingPreviousPage,
     fetchNextPage,
-    fetchPreviousPage,
     hasNextPage,
-    hasPreviousPage,
   } = useInfiniteQuery(
     'projects',
     async ({ pageParam = 1 }) => {
@@ -32,6 +27,7 @@ export default function List() {
   const loadMoreButtonRef = useRef<HTMLButtonElement>();
 
   useIntersectionObserver({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     target: loadMoreButtonRef,
     onIntersect: fetchNextPage,
@@ -43,6 +39,7 @@ export default function List() {
       {status === 'loading' ? (
         <p>Loading...</p>
       ) : status === 'error' ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <span>Error: {error.message}</span>
       ) : (
@@ -51,7 +48,7 @@ export default function List() {
             data.pages.map((page) => (
               <Box key={page.nextId}>
                 {page.data.map((post) => (
-                  <PostItem title={post.title} body={post.body} id={post.id}/>
+                  <PostItem title={post.title} body={post.body} id={post.id} />
                 ))}
               </Box>
             ))}

@@ -1,39 +1,16 @@
-/*import { usePostService } from '@xepelin-test/core';
+import React from 'react';
+import { chakra, Box, Image, Flex, useColorModeValue } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
+import { usePostService } from '@xepelin-test/core';
 
-export default function View(props : any) {
- const id = props.match.params.id;
-const {getPost} = usePostService();
-
-
-  const post = useQuery(['getPost', id], () => getPost(id))
-
-  return(
-    <div>Hello {props.match.params.id}!  {post.data?.title}!</div>
-  )
-} */
-
-
-import React from "react";
-import {
-  chakra,
-  Box,
-  Image,
-  Flex,
-  useColorModeValue,
-  Link,
-} from "@chakra-ui/react";
-import { useQuery } from 'react-query';
-import { usePostService } from "@xepelin-test/core";
-
-export default function View(props : any) {
+export default function View(props: any) {
   const id = props.match.params.id;
-  const {getPost} = usePostService();
-  const post = useQuery(['getPost', id], () => getPost(id));
-  const {title, body, userId} = post.data ?? {};
+  const { getPost } = usePostService();
+  const { data } = useQuery(['getPost', id], () => getPost(id));
+  const { title, body, userId } = data ?? {};
   return (
     <Flex
-      bg={useColorModeValue("#F9FAFB", "gray.600")}
+      bg={useColorModeValue('#F9FAFB', 'gray.600')}
       p={50}
       w="full"
       alignItems="center"
@@ -43,7 +20,7 @@ export default function View(props : any) {
         mx="auto"
         rounded="lg"
         shadow="md"
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue('white', 'gray.800')}
         maxW="2xl"
       >
         <Box p={6}>
@@ -51,13 +28,13 @@ export default function View(props : any) {
             <chakra.span
               fontSize="xs"
               textTransform="uppercase"
-              color={useColorModeValue("brand.600", "brand.400")}
+              color={useColorModeValue('brand.600', 'brand.400')}
             >
               Id: {id}
             </chakra.span>
             <chakra.p
               display="block"
-              color={useColorModeValue("gray.800", "white")}
+              color={useColorModeValue('gray.800', 'white')}
               fontWeight="bold"
               fontSize="2xl"
               mt={2}
@@ -67,7 +44,7 @@ export default function View(props : any) {
             <chakra.p
               mt={2}
               fontSize="sm"
-              color={useColorModeValue("gray.600", "gray.400")}
+              color={useColorModeValue('gray.600', 'gray.400')}
             >
               {body}
             </chakra.p>
@@ -87,7 +64,7 @@ export default function View(props : any) {
               <chakra.span
                 mx={1}
                 fontSize="sm"
-                color={useColorModeValue("gray.600", "gray.300")}
+                color={useColorModeValue('gray.600', 'gray.300')}
               >
                 user id: {userId}
               </chakra.span>
@@ -97,6 +74,4 @@ export default function View(props : any) {
       </Box>
     </Flex>
   );
-};
-
-
+}

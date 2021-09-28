@@ -1,4 +1,4 @@
-import { PostType } from '@xepelin-test/core';
+import { PostType } from '../domain/Post';
 import axios from 'axios';
 import { createPostUrl, random } from '../utils/utils';
 

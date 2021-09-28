@@ -1,4 +1,4 @@
-import { MutableRefObject, RefObject, useEffect } from 'react';
+import { MutableRefObject, useEffect } from 'react';
 
 export default function useIntersectionObserver({
   root,
@@ -41,5 +41,5 @@ export default function useIntersectionObserver({
     return () => {
       observer.unobserve(el);
     };
-  }, [target.current, enabled]);
+  }, [enabled, root, rootMargin, threshold, target, onIntersect]);
 }

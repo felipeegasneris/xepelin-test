@@ -1,8 +1,5 @@
 import {
   Box,
-  Button,
-  Stack,
-  VStack,
   useDisclosure,
   useColorModeValue,
   Icon,
@@ -12,38 +9,23 @@ import {
   DrawerContent,
   Drawer,
   IconButton,
-  InputGroup,
-  InputLeftElement,
-  Input,
   Avatar,
-  Image as Img
+  Image as Img,
 } from '@chakra-ui/react';
 
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
-import {FaRss, FaBell} from 'react-icons/fa'
-import {MdHome} from 'react-icons/md'
-import {FiSearch, FiMenu} from 'react-icons/fi'
+import { FaRss } from 'react-icons/fa';
+import { MdHome } from 'react-icons/md';
+import { FiMenu } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { ReactChild, ReactChildren } from 'react';
+import React from 'react';
 
-/*export default function Sidebar() {
-  return (
-    <VStack spacing={4}>
-      <Button>
-        <Link to="/new">Crear post</Link>
-      </Button>
-      <Button>
-        <Link to="/">Listar posts</Link>
-      </Button>
-    </VStack>
-  );
-} */
-
-export default function Layout(props: any) {
+export default function Layout(props: { children: React.ReactNode }) {
   const sidebar = useDisclosure();
-  const integrations = useDisclosure();
 
-  const NavItem = (props: any) => {
+  const NavItem = (props: {
+    icon: React.ReactNode;
+    children: React.ReactNode;
+  }) => {
     const { icon, children, ...rest } = props;
     return (
       <Flex
@@ -67,8 +49,11 @@ export default function Layout(props: any) {
             mr="2"
             boxSize="4"
             _groupHover={{
+              // eslint-disable-next-line react-hooks/rules-of-hooks
               color: useColorModeValue('gray.600', 'gray.300'),
             }}
+            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
             as={icon}
           />
         )}
@@ -117,8 +102,12 @@ export default function Layout(props: any) {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <Link to="/new"><NavItem icon={MdHome}>new Post</NavItem></Link>
-        <Link to="/"><NavItem icon={FaRss}>Posts</NavItem></Link>
+        <Link to="/new">
+          <NavItem icon={MdHome}>new Post</NavItem>
+        </Link>
+        <Link to="/">
+          <NavItem icon={FaRss}>Posts</NavItem>
+        </Link>
       </Flex>
     </Box>
   );
